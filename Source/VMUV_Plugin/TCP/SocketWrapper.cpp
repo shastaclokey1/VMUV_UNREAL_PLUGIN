@@ -82,7 +82,7 @@ void socketWrapper::clientStartRead()
 	{
 		nret = WSAGetLastError();
 		UE_LOG(LogTemp, Error, TEXT("ERROR WITH socket() initiallization!"));
-		traceLogger::queueMessage(traceLogger::buildMessage(moduleName, method, "Error With socket() initiallization"));
+		traceLogger::queueMessage(traceLogger::buildMessage(moduleName, method, FString("Error With socket() initiallization") + FString::FromInt(nret)));
 		closesocket(client);
 		WSACleanup();
 		return;
@@ -100,7 +100,7 @@ void socketWrapper::clientStartRead()
 	{
 		nret = WSAGetLastError();
 		UE_LOG(LogTemp, Error, TEXT("ERROR WITH connect() function!"));
-		traceLogger::queueMessage(traceLogger::buildMessage(moduleName, method, "Error With connect() initiallization"));
+		traceLogger::queueMessage(traceLogger::buildMessage(moduleName, method, FString("Error With connect() initiallization: ") + FString::FromInt(nret)));
 		closesocket(client);
 		WSACleanup();
 		return;
